@@ -33,7 +33,8 @@ app.use(
     origin: [
       "http://localhost:3000", // For local Vite
       "http://localhost:5173", // Alternate local Vite
-      "https://co2-tolerance-trainer.vercel.app", // Your Vercel App
+      "https://co2-tolerance-trainer.vercel.app",
+      "https://co-2-training-app.vercel.app",
     ],
     credentials: true,
   })
