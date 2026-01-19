@@ -1,0 +1,5 @@
+{
+  "name": "CO2 Tolerance Trainer",
+  "description": "A calm, mobile-first breath-holding trainer for CO2 tolerance, featuring baseline testing, adaptive rounds, and AI-driven progress insights.",
+  "requestFramePermissions": []
+}
