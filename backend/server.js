@@ -5,16 +5,16 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// ✅ Correct Imports (Pointing to your new folders)
+// ✅ Correct Imports
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
-import zohoRoutes from "./routes/zohoRoutes.js"; // <--- ADDED THIS 1/2
+import zohoRoutes from "./routes/zohoRoutes.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js"; // ✅ Imported
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ Load env from the current folder (backend/.env)
 dotenv.config();
 
 connectDB();
@@ -27,12 +27,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ✅ Correct CORS (Allows both your Laptop AND Vercel)
+// ✅ Correct CORS
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // For local Vite
-      "http://localhost:5173", // Alternate local Vite
+      "http://localhost:3000",
+      "http://localhost:5173",
       "https://co2-tolerance-trainer.vercel.app",
       "https://co-2-training-app.vercel.app",
     ],
@@ -43,8 +43,11 @@ app.use(
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/sessions", sessionRoutes);
-app.use("/api/zoho", zohoRoutes); // <--- ADDED THIS 2/2
+app.use("/api/zoho", zohoRoutes);
 
 app.get("/", (req, res) => res.send("Server is ready"));
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

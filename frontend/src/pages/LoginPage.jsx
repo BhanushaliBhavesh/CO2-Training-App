@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../slices/usersapiSlice";
 import { setCredentials } from "../slices/authSlice";
 import PhoneFrame from "../components/PhoneFrame";
-import BreathingButton from "../components/BreathingButton"; // ✅ Import
+import BreathingButton from "../components/BreathingButton";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +22,13 @@ const LoginPage = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    // 1. Check for Empty Fields (Manual Validation like Register Page)
+    if (!email || !password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
@@ -48,6 +55,7 @@ const LoginPage = () => {
               type="email"
               placeholder="Enter your email"
               value={email}
+              required // ✅ Added HTML Validation
               onChange={(e) => setEmail(e.target.value)}
               className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-slate-800 font-medium"
             />
@@ -61,6 +69,7 @@ const LoginPage = () => {
               type="password"
               placeholder="••••••••"
               value={password}
+              required // ✅ Added HTML Validation
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-slate-800 font-medium"
             />
