@@ -34,9 +34,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://localhost:5173",
-      "https://co2-tolerance-trainer.vercel.app",
-      "https://co-2-training-app.vercel.app",
-      
+      "https://co-2-training-app.vercel.app/",
     ],
     credentials: true,
   })
