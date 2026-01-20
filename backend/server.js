@@ -20,6 +20,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.set("trust proxy", 1);
 const port = process.env.PORT || 5000;
 
 // Middleware
@@ -35,6 +36,7 @@ app.use(
       "http://localhost:5173",
       "https://co2-tolerance-trainer.vercel.app",
       "https://co-2-training-app.vercel.app",
+      
     ],
     credentials: true,
   })
