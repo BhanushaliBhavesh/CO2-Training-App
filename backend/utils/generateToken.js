@@ -7,10 +7,10 @@ const generateToken = (res, userId) => {
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    // Use secure: true in production (HTTPS), false in dev (HTTP)
-    secure: process.env.NODE_ENV === "production",
-    // Must be 'None' for cross-site (Vercel->Render) cookies
-    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    // ⚠️ FORCE secure: true (Required for Render/HTTPS)
+    secure: true,
+    // ⚠️ FORCE sameSite: 'none' (Required for Vercel -> Render)
+    sameSite: "none",
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 };
